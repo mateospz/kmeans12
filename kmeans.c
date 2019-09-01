@@ -39,7 +39,7 @@ float calc_distance(int dim, float *p1, float  *p2) {
 */
 void calc_all_distances(int dim, int n, int k, float *X, float *centroid, float *distance_output) {
 
-
+    #pragma omp parallel for
     for (int i = 0; i < n; ++i) // for each point
         for (int j = 0; j < k; ++j) { // for each cluster
             // calculate distance between point and cluster centroid
@@ -317,6 +317,7 @@ void random_init_centroid (float * cluster_centro_id, float * dataSetMatrix, int
 
    srand(time(NULL));
 
+   #pragma omp parallel for
    for (int i=0; i<clusters; ++i) {
 
         int r = rand()%rows;
